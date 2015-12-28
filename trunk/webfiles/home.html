@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+  <link rel="stylesheet"
+ href="http://static.ak.connect.facebook.com/css/fb_connect.css"
+ type="text/css">
+  <link rel="stylesheet"
+ href="http://static.ak.connect.facebook.com/css/fb_connect.css"
+ type="text/css">
+  <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
+<script
+ src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php"
+ type="text/javascript"></script>
+<script type="text/javascript"> 
+FB_RequireFeatures(["XFBML"], function() { 
+FB.Facebook.init("YOUR_API_KEY_HERE", "<path from web root>/xd_receiver.htm"); 
+
+
+});
+ </script><a
+ href="#" class="fbtab">News Feed</a>
+<a href="#" class="fbtab">Notifications</a>
+<a href="#" class="fbtab">Requests</a>
+<fb:serverfbml><fb:fbml> <fb:feed></fb:feed></fb:fbml></fb:serverfbml><br>
+<p>Top
+News
+<fb:wall> <fb:wallpost uid="12345">This is a wall post from uid 12345</fb:wallpost>
+</fb:wall></p>
+</body>
+</html>

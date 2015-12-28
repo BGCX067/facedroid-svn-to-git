@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml"> 
+<head> <link rel="stylesheet" href="http://static.ak.connect.facebook.com/css/fb_connect.css" type="text/css" /> </head> 
+<body>  
+<script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script> 
+<script type="text/javascript"> 
+var friendsID;
+//FB.FBDebug.isEnabled=true;
+
+FB_RequireFeatures(["XFBML"], function() { 
+FB.Facebook.init("YOUR_API_KEY_HERE", "<path from web root>/xd_receiver.htm"); 
+FB.Facebook.get_sessionState().waitUntilReady(
+function() {
+
+FB.Facebook.apiClient.friends_get(null, function(friendsID, ex) { 
+
+//FB.FBDebug.dump(friendsID,"ids");
+getFriendsInfo(friendsID);
+ });
+
+ 
+  }); 
+
+}); 
+
+function getFriendsInfo(friendsID){
+FB.Facebook.apiClient.users_getInfo(friendsID, ["name","pic_small","status"], function(friends,ex){
+//FB.FBDebug.dump(friendsID,"de nuevo");
+printFriends(friends);
+});
+
+}
+function printFriends(list){
+//FB.FBDebug.dump(list,"tengo");
+//document.getElementById("friends").innerHTML="list="+list.prototype;
+for(i in list){
+document.getElementById("friends").innerHTML+="<tr><table border=0><tr><td><img src="+list[i].pic_small+"></img></td><td><b>"+list[i].name+"</b><br/>"+list[i].status.message+"</td></tr></table><hr/></tr>";
+}
+}
+</script>
+<table border=0>
+<div id="friends"></div>
+</table>
+ </body> </html> 

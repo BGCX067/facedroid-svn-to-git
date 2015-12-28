@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+  <link rel="stylesheet"
+ href="http://static.ak.connect.facebook.com/css/fb_connect.css"
+ type="text/css">
+  <link type="text/css" rel="stylesheet" media="screen"
+ href="static.ak.fbcdn.net/rsrc.php/v1/pkg/77/118975/css/common.css.pkg.php">
+  <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
+<script
+ src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php"
+ type="text/javascript"></script>
+<script type="text/javascript"> 
+FB_RequireFeatures(["XFBML"], function() { 
+FB.Facebook.init("YOUR_API_KEY_HERE", "<path from web root>/xd_receiver.htm"); 
+FB.Facebook.get_sessionState().waitUntilReady(
+function() {
+
+FB.Facebook.apiClient.users_getInfo([FB.Facebook.apiClient.get_session().uid], ["name","pic","status"], function(result,ex){
+document.getElementById("picture").innerHTML="<img src="+result[0].pic+"></img>";
+document.getElementById("name").innerHTML=result[0].name;
+document.getElementById("status").innerHTML="<span>"+result[0].status.message+"</span>";
+});
+ 
+  }); 
+
+}); 
+function sendStatus(){
+FB.facebook.apiclient.users_setStatus(document.getElementById("setstatus").value,false, true, function(result,e){
+document.getElementById("status").innerHTML=result;
+});
+}
+</script>
+<div class="fbbluebox" style="width: 200px;">
+<table border="0">
+  <tbody>
+    <tr>
+      <td>
+      <div id="picture"> <br>
+      </div>
+      </td>
+      <td width="100">
+      <div id="name"><br>
+      </div>
+      <div id="status" class="blockquote"><br>
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<form><input id="setstatus" type="text"> <button value="Set status"
+ onclick="sendStatus();">Set Status</button>
+</form>
+</div>
+</body>
+</html>
